@@ -16,6 +16,7 @@ class CategoriesTableSeeder extends Seeder
      */
     public function run(): void
     {
+       //Creacion de seeder para los datos en la tabla categories
         $faker = Faker::create();
         for ($i = 0; $i < 10; $i++) {
             

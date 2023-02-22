@@ -12,9 +12,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        //Para que se ejecuten los seeders automaticamente
         $this->call(BooksTableSeeder::class);
         $this->call(CategoriesTableSeeder::class);
-        $this->call(Book_CategoryTableSeeder::class);
+        $this->call(BookCategoryTableSeeder::class);
 
 
     }

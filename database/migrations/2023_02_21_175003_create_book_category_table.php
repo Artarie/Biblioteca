@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        //Creacion de tabla pivote
         Schema::create('book_category', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('category_id');

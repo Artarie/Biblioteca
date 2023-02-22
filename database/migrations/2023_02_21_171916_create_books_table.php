@@ -12,6 +12,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        //Creacion de tabla books
         Schema::create('books', function (Blueprint $table) {
             $table->increments('id');
             $table->string('isbn')->unique();

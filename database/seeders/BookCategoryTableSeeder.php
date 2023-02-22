@@ -9,7 +9,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class Book_CategoryTableSeeder extends Seeder
+class BookCategoryTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -18,11 +18,11 @@ class Book_CategoryTableSeeder extends Seeder
     {
 
         
-
-       for($i = 0; $i < 10 ; $i++){
+        //Seeder en la tabla pivote
+       for($i = 0; $i < rand(10,20) ; $i++){
                 DB::table('book_category')->insert([
                     'id' => $i +1,
-                    'book_id' => rand(1,10),
+                    'book_id' => rand(1, 10),
                     'category_id' => rand(1,10),
                     'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                     'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
