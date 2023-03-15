@@ -8,12 +8,8 @@
   </div>
   <div>
     <div>
-      <a href="{{route('book.create')}}" type="button" class="btn btn-primary">CREAR LIBRO</a>
-      @if(Session::has('success'))
-    <div class="alert alert-success">
-        {{Session::get('success')}}
-    </div>
-@endif
+    
+
     </div>
     <table class="table table-hover">
       <thead>
