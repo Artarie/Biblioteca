@@ -22,7 +22,7 @@ class BooksTableSeeder extends Seeder
             
             DB::table("books")->insert(
                 [
-                     "id" => $i + 1,
+                    "id" => $i + 1,
                     "isbn" => $faker->isbn10(),
                     "title" => $faker->streetName(),
                     "author" => $faker->name,
