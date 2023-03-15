@@ -23,6 +23,8 @@ use App\Http\Controllers\BookController;
     Route::get('/books/{id}/edit', 'App\Http\Controllers\BookController@edit')->name('book.edit');
     Route::put('/books/{id}', 'App\Http\Controllers\BookController@update')->name('book.update');
     Route::delete('/books/{id}', 'App\Http\Controllers\BookController@destroy')->name('book.destroy');
+    Route::get('/category/{id}/books', 'App\Http\Controllers\CategoryController@index')->name('category.books');
+
 
 
 

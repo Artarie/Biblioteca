@@ -14,8 +14,10 @@ class BookController extends Controller
     public function index()
     {
         $book = DB::table('books')->orderBy('created_at', 'desc')->paginate(5);
+        $categories = DB::table('categories')->orderBy('created_at', 'desc')->get();
         return view('crud.index', [
-            'books' => $book
+            'books' => $book,
+            'categories' => $categories
         ]);
     }
 
@@ -36,19 +38,22 @@ class BookController extends Controller
 
     public function create()
     {
+        $categories = DB::table('categories')->orderBy('created_at', 'desc')->get();
 
-        return view('crud.create');
+        return view('crud.create', ['categories' => $categories]);
     }
 
     public function store(Request $request)
     {
+        $lastInsertediD = DB::table("books")->max("id");
+
         $isbn = $request->input('isbn');
         $title = $request->input('title');
         $author = $request->input('author');
         $published_date = $request->input('published_date');
         $description = $request->input('description');
         $price = $request->input('price');
-
+        $category = $request->input('category');
         DB::table('books')->insert([
             [
                 'isbn' => $isbn, 'title' => $title, 'author' => $author, 'published_date' => $published_date, 'description' => $description,
@@ -57,12 +62,17 @@ class BookController extends Controller
 
         ]);
 
+        DB::table('book_category')->insert([
+            'category_id' => $category, 'book_id' =>   $lastInsertediD + 1, "created_at" => Carbon::now(), "updated_at" => now()
+        ]);
+
         return redirect('/books')->with('success', 'Libro añadido correctamente!');
     }
 
     public function edit($id)
     {
         $book = DB::table('books')->find($id);
+        
         return view('crud.partials.index', [
             'book' => $book
         ]);
@@ -83,7 +93,7 @@ class BookController extends Controller
                 'isbn' => $isbn, 'title' => $title, 'author' => $author, 'published_date' => $published_date, 'description' => $description,
                 'price' => $price, "updated_at" => now()
             ]);
-        return redirect('books/');
+        return redirect('books/')->with('success', 'Libro editado correctamente!');
     }
 
     public function destroy($id)

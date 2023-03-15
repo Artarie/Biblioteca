@@ -11,41 +11,39 @@
 
 
 
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Navbar</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{{route('book.index')}}">Books</a>
-          </li>
-
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Categories
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              @foreach($categories as $category)
-
-              <li><a class="dropdown-item" href="{{route('category.books', $category->id)}}">{{$category->name}}</a></li>
-              <hr class="dropdown-divider">
-              @endforeach
-
-            </ul>
-        </ul>
-      </div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{{route('book.index')}}" >Books</a>
+        </li>
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Categories
+                </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            @foreach($categories as $category)
+           
+            <li><a class="dropdown-item" href="{{route('category.books', $category->id)}}">{{$category->name}}</a></li>
+            <hr class="dropdown-divider">
+            @endforeach
+         
+          </ul>
+      </ul>
     </div>
-  </nav>
+  </div>
+</nav>
 
 
   <hr>
   <div>
-    <div>
-      <a href="{{route('book.create')}}" type="button" class="btn btn-primary">CREAR LIBRO</a>
-    </div>
+
     <div>
       @if(session('success'))
       <div class="alert alert-success">
@@ -59,7 +57,7 @@
       </div>
       @endif
     </div>
-    <div style="width: 90%; margin: auto;">
+    <div style="width: 75%; margin: auto;">
       <table class="table table-hover" style="border: solid 2px black;">
         <thead>
           <tr>
@@ -72,11 +70,11 @@
             <th>Price</th>
             <th>Created_at</th>
             <th>Updated_at</th>
-            <th>Show alone</th>
+
           </tr>
         </thead>
         <tbody>
-          @foreach($books as $book)
+          @forelse($books as $book)
           <tr>
             <td nowrap> <a href="books/{{$book->id}}/edit" class="btn btn-primary">Editar
                 <i class="fa fa-pencil"></i>
@@ -92,19 +90,18 @@
             <td>{{$book->author}}</td>
             <td>{{$book->published_date}}</td>
             <td>{{$book->description}}</td>
-            <td>{{$book->price}} €</td>
+            <td>{{$book->price}}</td>
             <td>{{$book->created_at}}</td>
             <td>{{$book->updated_at}}</td>
-            <td><a href="books/{{$book->id}}" class="btn btn-primary">Show
-                <i class="fa fa-pencil"></i>
-              </a></td>
           </tr>
-         @endforeach
+          @empty
+          <td> No hay registros.</td>
+          @endforelse
         </tbody>
 
       </table>
       <div class="d-flex justify-content-center">
-        {{ $books->links() }}
+     
       </div>
     </div>
   </div>
